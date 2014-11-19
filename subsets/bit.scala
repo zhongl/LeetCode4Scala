@@ -1,4 +1,12 @@
-/* @see https://oj.leetcode.com/problems/subsets/ */
+/**
+ * {{{
+ * in  = [1,2,3]
+ * out = [1    ] ~ [1,0,0]
+ * out = [1,2, ] ~ [1,1,0]
+ * out = [1,  3] ~ [1,0,1]
+ * }}}
+ * @see https://oj.leetcode.com/problems/subsets/ 
+ */
 def subsets(in: List[Int]): List[List[Int]] = {
   val l = in sortWith (_ > _)
   def bit(n: Int): List[Int] = {
