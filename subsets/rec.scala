@@ -11,12 +11,12 @@
  * @see https://oj.leetcode.com/problems/subsets/
  */
 def subsets(in: List[Int]): List[List[Int]] = {
-  def loop(h: Int, t: List[List[Int]]): List[List[Int]] = {
+  def prepend(h: Int, t: List[List[Int]]): List[List[Int]] = {
     (t map {i => h :: i}) ::: t
   }
   in sortWith (_ < _) match {
     case Nil    => in :: Nil
-    case h :: t => loop(h, subsets(t))
+    case h :: t => prepend(h, subsets(t))
   }
 }
 
