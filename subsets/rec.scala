@@ -12,11 +12,15 @@
  */
 def subsets(in: List[Int]): List[List[Int]] = {
   def combine(h: Int, t: List[List[Int]]): List[List[Int]] = {
-    (t map {i => h :: i}) ::: t
+    if (t.isEmpty) (h :: Nil) :: Nil :: Nil 
+    else (t map {i => h :: i}) ::: t
   }
-  in sortWith (_ < _) match {
-    case Nil    => in :: Nil
-    case h :: t => combine(h, subsets(t))
-  }
+  @scala.annotation.tailrec
+  def loop(i: List[Int], f: List[List[Int]] => List[List[Int]]): List[List[Int]] =
+    i match {
+      case Nil    => f(Nil)
+      case h :: t => loop(t, l => f(combine(h, l)))
+    }
+  loop(in sortWith (_ < _), l => l)
 }
 
